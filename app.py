@@ -219,14 +219,14 @@ def libros_inicio():
         nuevos_ids = []
         for titulo in titulos:
             libro = Libro.obtener_por_titulo(titulo)
-            if libro:
+            if libro and libro.id not in nuevos_ids:
                 nuevos_ids.append(libro.id)
             else:
                 titulos_no_encontrados.append(titulo)
 
         if titulos_no_encontrados:
             mensaje_error = (
-                "Los siguientes libros no se encuentran en la base de datos: "
+                "Los siguientes libros no se encuentran en la base de datos o estan repetidos: "
                 + ", ".join(titulos_no_encontrados)
             )
         else:
